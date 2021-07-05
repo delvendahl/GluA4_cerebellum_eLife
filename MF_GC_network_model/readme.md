@@ -1,6 +1,6 @@
 ## Feedforward MF-GC model
 
-Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 (doi:10.1038/s41467-017-01109-y). Implemented to run simulations of MF-GC network in Kita et al. 2021 (doi:xxx). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simulations are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO'). Output of the simulations can be used to train a perceptorn classifier and analyse the influence of GC population characteristics on learning speed.  
+Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 (doi:10.1038/s41467-017-01109-y). Implemented to run simulations of MF-GC network in Kita et al. 2021 (doi:10.7554/eLife.65152). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simulations are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO'). Output of the simulations can be used to train a perceptorn classifier and analyse the influence of GC population characteristics on learning speed.  
   
 Simulations were run in Python 2.7 using pyNeuroML 0.5.5 and jNeuroML 0.8.5.  
 Dependencies:  
