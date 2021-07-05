@@ -1,6 +1,6 @@
 ## Feedforward MF-GC model
 
-Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 (doi:10.1038/s41467-017-01109-y). Implemented to run simulations of MF-GC network in Kita et al. 2021 (doi:xxx). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simualtions are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO').  
+Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 (doi:10.1038/s41467-017-01109-y). Implemented to run simulations of MF-GC network in Kita et al. 2021 (doi:xxx). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simulations are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO'). Output of the simulations can be used to train a perceptorn classifier and analyse the influence of GC population characteristics on learning speed.  
   
 Simulations were run in Python 2.7 using pyNeuroML 0.5.5 and jNeuroML 0.8.5.  
 Dependencies:  
@@ -26,7 +26,7 @@ Getting started:
 
 Run simulations:  
 * `cd` into biophysical_model folder  
-* initialize network by running `initialize_network.py`; prints total number of runs  
+* initialize network by running `initialize_network.py`; creates the required file 'params_file.pkl' and prints total number of runs  
 * run the simulation as `run_mf_gc_network.py`  
 * data will be saved into subfolders named data_r0, data_r5, etc.  
   
@@ -34,3 +34,4 @@ Analyse data:
 * extract spike times from .dat files by running `save_samples_as_txt.py foldername` (replace `foldername` according to target folder); this creates .txt files in the target folder   
 * analyse population characteristics by running `get_spar_cov.py foldername`(replace `foldername` according to target folder); generates file xxx.txt in the target folder  
 * analyse learning performance by running `run_learning.py foldername`(replace `foldername` according to target folder); generates file xxx.txt in the target folder  
+* alternatively, learning can be analyzed using a MLPClassifier (requires scikit-learn): run `run_learning_scikitMLP.py foldername` (note: Kita et al. used the backpropagation algorithm from the original model)

@@ -1,16 +1,15 @@
 # Runs biophysical simulations of MF-GC network
 # Designed to write files to be run in parallel on a server or cluster, 
 # but can also be used to run individually
-# python run_mf_grc_network.py runID sigma NADT
+# python run_mf_grc_network.py
 # Generates xml and nml files for model, saved in tempdata folder
 # To simulate, switch run to True, spike times are saved as .dat
 
 # Flow for biophysical model:
-# python initialize_network_params.py to generate params_file.pkl for a specific sigma, NADT
-# python run_mf_grc_network.py runID sigma NADT
-# to run files for specific sigma, NADT -- run for ALL runID in params_file.pkl
+# python initialize_network_params.py to generate params_file.pkl for a specific correlation radius (sigma)
+# python run_mf_grc_network.py
 # python save_samples_as_txt.py basedir to convert .dat files of spiketimes to .txt files of activity patterns
-# Then can run test_mf_grc_backprop_biophys.py, etc.
+# Then can run run_learning.py, get_spar_cov.py, etc.
 
 import neuroml as nml
 from pyneuroml import pynml
