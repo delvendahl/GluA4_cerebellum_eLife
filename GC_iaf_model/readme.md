@@ -1,6 +1,6 @@
 ## GC integrate-and-fire model
 
-Simulations of GC properties and MF->GC transmission from Kita et al. 2021 (doi:10.7554/eLife.65152).  
+Simulations of GC properties and MF->GC transmission from Kita et al. 2021 ([doi:10.7554/eLife.65152](https://elifesciences.org/articles/65152)).  
 Simulations are run in IgorPro (Wavemetrics) using NeuroMatic (www.thinkrandom.com).  
 Tested on Mac OS 10.14.6 running IgorPro 6.37 and Neuromatic v3.0c.  
   
