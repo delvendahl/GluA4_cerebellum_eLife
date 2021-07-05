@@ -34,6 +34,6 @@ Run simulations:
   
 Analyse data:  
 * extract spike times from .dat files by running `save_samples_as_txt.py foldername` (replace `foldername` according to target folder); this creates .txt files in the target folder   
-* analyse population characteristics by running `get_spar_cov.py foldername`(replace `foldername` according to target folder); generates files gc_spar_biophys_*.txt and gc_cov_biophys_*.txt in the target folder  
+* analyse population characteristics by running `get_spar_cov.py foldername`(replace `foldername` according to target folder); generates files gc_spar_biophys_\*.txt and gc_cov_biophys_\*.txt in the target folder  
 * analyse learning performance by running `run_learning.py foldername`(replace `foldername` according to target folder); generates file learning_results.txt in the target folder containing RMS error per training epoch  
 * alternatively, learning can be analyzed using a MLPClassifier (requires scikit-learn): run `run_learning_scikitMLP.py foldername` (note: for Kita et al. 2021, the backpropagation algorithm from the original model was used)
