@@ -25,7 +25,7 @@ Getting started:
 * install dependencies:  
   * `pip install pyneuroml` to install pyNeuroML
   * download the compiled binary of jNeuroML and put it into the MF_GC_network_model folder (alternatively, set environment variable _JNML_HOME_ and add the jNeuroML folder to the _PATH_ variable)
-* create folders to store data within the biophysical_model folder by running `create_folders.py`  
+* create folders to store data within the biophysical_model folder by running `create_folders.py` (located in biophysical_model folder)  
 
 Run simulations:  
 * `cd` into biophysical_model folder  

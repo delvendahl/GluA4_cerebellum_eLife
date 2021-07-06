@@ -21,12 +21,12 @@ import pickle as pkl
 import scipy.io as io
 import random
 from datetime import datetime
-from multiprocessing import Pool
+from multiprocessing import Condition, Pool
 from functools import partial
 
 
 def generate_grc_layer_network(runID, correlationRadius, duration=180.0, dt=0.05,
-                               minimumISI=2.0, ONRate=50.0, OFFRate=0.0, run=False):
+                               minimumISI=2.0, ONRate=50.0, OFFRate=0.0, condition='orig', run=False):
     """
     Creates GrC layer network and runs LEMS simulation.
 
@@ -37,6 +37,7 @@ def generate_grc_layer_network(runID, correlationRadius, duration=180.0, dt=0.05
     :param minimumISI: minimum ISI for MF (ms, default=2.0)
     :param ONRate: rate of active MFs (Hz, default=50.0)
     :param OFFRate: rate of inactive MFs (Hz, default=0.0)
+    :param condition: Which simulation to run, defaults to 'orig'
     :param run: boolean (default=False)
     :return: boolean (success)
     """
@@ -87,13 +88,13 @@ def generate_grc_layer_network(runID, correlationRadius, duration=180.0, dt=0.05
     spike_generator_doc = pynml.read_lems_file(spike_generator_file_name)
 
     # Integrate-and-fire GC model
-    iaf_nml2_file_name = '../../grc_lemsDefinitions/IaF_GrC.nml'
+    iaf_nml2_file_name = '../../grc_lemsDefinitions/IaF_GrC_{}.nml'.format(condition)
     iaF_GrC_doc = pynml.read_neuroml2_file(iaf_nml2_file_name)
     iaF_GrC = iaF_GrC_doc.iaf_ref_cells[0]
 
     # AMPAR and NMDAR mediated synapses
-    ampa_syn_filename = "../../grc_lemsDefinitions/RothmanMFToGrCAMPA_{:.0f}.xml".format(N_syn)
-    nmda_syn_filename = "../../grc_lemsDefinitions/RothmanMFToGrCNMDA_{:.0f}.xml".format(N_syn)
+    ampa_syn_filename = "../../grc_lemsDefinitions/MFGrC_AMPA_{}.xml".format(condition)
+    nmda_syn_filename = "../../grc_lemsDefinitions/MFGrC_NMDA_{}.xml".format(condition)
     rothmanMFToGrCAMPA_doc = pynml.read_lems_file(ampa_syn_filename)
     rothmanMFToGrCNMDA_doc = pynml.read_lems_file(nmda_syn_filename)
     
@@ -181,7 +182,7 @@ def generate_grc_layer_network(runID, correlationRadius, duration=180.0, dt=0.05
 
     # Specify Displays and Output Files
     # Details for saving output files
-    basedir = '../data_r{}/'.format(correlationRadius)
+    basedir = '../{}_data_r{}/'.format(condition, correlationRadius)
 
     # Add parameter values to spike time filename
     end_filename = '{}_{:.2f}_{}'.format(N_syn, f_mf, run_num)
@@ -218,7 +219,13 @@ if __name__ == '__main__':
     
     startTime = datetime.now()
     
-    runs = range(640)
+    # type of simulation to run; change this to 'KO' for GluA4_KO model
+    sim_type = 'orig' 
+
+    # total number of simulation runs per correlation radius (= num_patterns * len(f_mf))
+    runs = range(5760)
+
+    # run simulation for the following MF correlation radii
     corrs = [0,5,10,15,20,25,30]
     
     # Move working dir to tempdata to hide xml and nml files
@@ -233,6 +240,7 @@ if __name__ == '__main__':
                            minimumISI=2,
                            ONRate=50,
                            OFFRate=0,
+                           condition=sim_type,
                            run=True)
         results = pool.map(run_this, runs)
     
