@@ -1,6 +1,6 @@
 ## Feedforward MF-GC model
 
-Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 ([doi:10.1038/s41467-017-01109-y](https://dx.doi.org/10.1038/s41467-017-01109-y)). Implemented to run simulations of MF-GC network in Kita et al. 2021 ([doi:10.7554/eLife.65152](https://elifesciences.org/articles/65152)). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simulations are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO'). Output of the simulations can be used to train a perceptron classifier and analyze the influence of GC population characteristics on learning speed.  
+Computational model of a feedforward MF-GC network. Original model taken from Cayco-Gajic et al. 2017 ([doi:10.1038/s41467-017-01109-y](https://dx.doi.org/10.1038/s41467-017-01109-y)). Implemented to run simulations of MF-GC network in Kita et al. 2021 ([doi:10.7554/eLife.65152](https://elifesciences.org/articles/65152)). The model simulates 640 input patterns of MF activity and the output of GCs in response to these patterns. Simulations are performed using the parameters of the original model ('original'), and using scaled conductances based on experimental data obtained from GluA4-KO mice ('KO'). For the KO condition, AMPAR conductance is scaled by 0.2, NMDAR conductance by 1.2, and leakConductance of the  GC is reduced by 0.16 nS. Output of the simulations can be used to train a perceptron classifier and analyze the influence of GC population characteristics on learning speed.  
   
 Simulations were run in Python 2.7 using pyNeuroML 0.5.5 and jNeuroML 0.8.5.  
 Dependencies:  
@@ -35,8 +35,10 @@ Run simulations:
 * for each simulation run (i.e. pattern), two files are created: 'MF_spikes_X_XX_XXX.dat' and 'GrC_spikes_X_XX_XXX.dat' (X = N_syn; XX = fraction of active MF; XXX = pattern number)
   
 Analyze data:  
-* extract spike times from .dat files by running `save_samples_as_txt.py foldername` (replace `foldername` according to target folder); this creates .txt files in the target folder   
+* extract spike times from .dat files by running `save_samples_as_txt.py foldername` (replace `foldername` according to target folder; example: `save_samples_as_txt.py results/orig_data_r0`); this creates .txt files in the target folder   
 * analyse population characteristics by running `get_spar_cov.py foldername`(replace `foldername` according to target folder); generates files gc_spar_biophys_\*.txt and gc_cov_biophys_\*.txt in the target folder  
 * analyze learning performance by running `run_learning.py foldername`(replace `foldername` according to target folder); generates file learning_results.txt in the target folder containing RMS error per training epoch  
 * alternatively, learning can be analyzed using a MLPClassifier (requires scikit-learn): run `run_learning_scikitMLP.py foldername` (note: for Kita et al. 2021, the backpropagation algorithm from the original model was used)  
 * run `plot_f_I_curve.py` to generate a frequency-current plot for the iaf-GC model used (change sim_type to 'ko' for KO model)  
+
+Running the orginial ('orig') and GluA4-KO ('ko') simulations for all correlation radii (0–30, step size 5) and all fractions of active MFs (0.1–0.9, step size 0.1) generates all the data required to reproduce Figure 6 of Kita et al. 2021. 
