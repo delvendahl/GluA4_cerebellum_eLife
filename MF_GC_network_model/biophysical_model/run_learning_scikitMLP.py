@@ -34,7 +34,7 @@ if __name__ == '__main__':
     startTime = datetime.now()
     np.random.seed(42)
 
-    basedir = basedir = '/' + sys.argv[1] + '/'
+    basedir = sys.argv[1]
     print(basedir)
 
     n_syn = 4
@@ -45,8 +45,8 @@ if __name__ == '__main__':
     gc_results = np.zeros((len(f_mf), 4))
 
     for i, fraction in enumerate(f_mf):
-        mf_samples = np.loadtxt(basedir + 'MF_samples_{}_{:.2f}.txt'.format(n_syn, fraction)).T
-        gc_samples = np.loadtxt(basedir + 'GrC_samples_{}_{:.2f}.txt'.format(n_syn, fraction)).T
+        mf_samples = np.loadtxt(basedir + '/MF_samples_{}_{:.2f}.txt'.format(n_syn, fraction)).T
+        gc_samples = np.loadtxt(basedir + '/GrC_samples_{}_{:.2f}.txt'.format(n_syn, fraction)).T
 
         y = np.random.choice(n_classes, mf_samples.shape[0], replace=True)
 
@@ -56,8 +56,8 @@ if __name__ == '__main__':
     print('MF patterns:')
     print(mf_results)
     print('')
-    print('GrC patterns:')
+    print('GC patterns:')
     print(gc_results)
 
-    np.savetxt(basedir + 'sklearn_result.txt', np.hstack((mf_results, gc_results)), delimiter='\t')
+    np.savetxt(basedir + '/sklearn_result.txt', np.hstack((mf_results, gc_results)), delimiter='\t')
     print(datetime.now() - startTime)

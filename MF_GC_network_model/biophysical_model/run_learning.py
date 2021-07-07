@@ -84,8 +84,8 @@ def analyse_learning(basedir, f_mf):
     err_grc = np.zeros(n_epochs, float)
     err_rms_grc = np.zeros(n_epochs, float)
     
-    samples_mf = np.loadtxt(basedir + 'MF_samples_' + str(n_syn) + '_' + '{:.2f}'.format(f_mf) + '.txt')
-    samples_grc = np.loadtxt(basedir + 'GrC_samples_' + str(n_syn) + '_' + '{:.2f}'.format(f_mf) + '.txt')
+    samples_mf = np.loadtxt(basedir + '/MF_samples_' + str(n_syn) + '_' + '{:.2f}'.format(f_mf) + '.txt')
+    samples_grc = np.loadtxt(basedir + '/GrC_samples_' + str(n_syn) + '_' + '{:.2f}'.format(f_mf) + '.txt')
     # Get pattern classifications
     target = np.zeros((c, num_patterns))
     for k in range(num_patterns):
@@ -111,7 +111,7 @@ if __name__ == '__main__':
     
     startTime = datetime.now()
 
-    basedir = basedir = '/' + sys.argv[1] + '/'
+    basedir = sys.argv[1]
     print(basedir)
     
     f_mf = np.linspace(0.1, 0.9, 9)
@@ -126,5 +126,5 @@ if __name__ == '__main__':
     pool.join()
 
     print('')
-    np.savetxt(basedir + 'learning_results.txt', results, delimiter='\t')
+    np.savetxt(basedir + '/learning_results.txt', results, delimiter='\t')
     print(datetime.now() - startTime)

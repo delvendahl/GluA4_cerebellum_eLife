@@ -23,7 +23,8 @@ def get_spike_counts(data, N):
 
 
 if __name__ == '__main__':
-	basedir = '/' + sys.argv[1]
+	
+	basedir = sys.argv[1]
 
 	file = open('params_file.pkl','rb')
 	p = pkl.load(file)
@@ -32,7 +33,7 @@ if __name__ == '__main__':
 	# Network parameters
 	N_mf = 187
 	N_grc = 487
-	N_patt = 640
+	N_patt = len(np.unique(p['run_num'])) / (len(np.unique(p['N_syn'])) * len(np.unique(p['f_mf'])))
 
 	N_syn = np.unique(p['N_syn'])
 	p_mf_ON = np.unique(p['f_mf'])
@@ -50,8 +51,8 @@ if __name__ == '__main__':
 				data = np.loadtxt(basedir+'/'+'GrC_spikes_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'_'+str(kk)+'.dat')
 				samples_grc[:, kk] = get_spike_counts(data, N_grc)
 			# save as .txt files
-			np.savetxt(basedir+'/'+'MF_samples_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'.txt', samples_mf)
-			np.savetxt(basedir+'/'+'GrC_samples_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'.txt', samples_grc)
+			np.savetxt(basedir+'/'+'MF_samples_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'.txt', samples_mf, fmt='%2.0f')
+			np.savetxt(basedir+'/'+'GrC_samples_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'.txt', samples_grc, fmt='%2.0f')
 
 			# uncomment the following two lines in order to automatically remove .dat files
 			#os.system('rm '+basedir+'/'+'MF_spikes_'+str(N_syn[ii])+'_'+'{:.2f}'.format(p_mf_ON[jj])+'_*.dat')

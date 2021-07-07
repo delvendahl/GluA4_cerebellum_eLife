@@ -30,7 +30,7 @@ def get_var_cov(x):
 
 if __name__ == '__main__':
 
-	basedir = '/' + sys.argv[1] + '/'
+	basedir = sys.argv[1]
 
 	N_syn = 4
 	f_mf = np.linspace(0.1, 0.9, 9)
@@ -40,8 +40,8 @@ if __name__ == '__main__':
 
 	print(N_syn)
 	for k in range(len(f_mf)):
-		samples_mf = np.loadtxt(basedir + 'MF_samples_{:.0f}_{:.2f}.txt'.format(N_syn, f_mf[k]))
-		samples_gc = np.loadtxt(basedir + 'GC_samples_{:.0f}_{:.2f}.txt'.format(N_syn, f_mf[k]))
+		samples_mf = np.loadtxt(basedir + '/MF_samples_{:.0f}_{:.2f}.txt'.format(N_syn, f_mf[k]))
+		samples_gc = np.loadtxt(basedir + '/GrC_samples_{:.0f}_{:.2f}.txt'.format(N_syn, f_mf[k]))
 		spar_mf[k], active_mf[k] = get_spar(samples_mf)
 		spar_gc[k], active_gc[k] = get_spar(samples_gc)
 		var_mf[k], cov_mf[k] = get_var_cov(samples_mf)

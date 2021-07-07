@@ -4,9 +4,9 @@
 import numpy as np
 import pickle as pkl
 
-N_syn_range = range(4, 5, 1)  # was range(1,21) in the original
-f_mf_range = np.linspace(.1, .9, 9)  # was np.linspace(.05,.95,19) in the original
-run_num_range = range(0, 640)  # number of patterns
+N_syn_range = range(4, 5, 1)  # was range(1, 21) in the original
+f_mf_range = np.linspace(.1, .9, 9)  # was np.linspace(.05, .95, 19) in the original
+run_num_range = range(640)  # number of patterns
 
 # Total runs over all parameters
 total_params = len(N_syn_range) * len(f_mf_range) * len(run_num_range)
